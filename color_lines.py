@@ -23,39 +23,6 @@ from PIL import Image
 import networkx as nx
 
 
-#new 08.07.2018
-
-###
-#План дій (08.07.2018):
-#=========
-
-#1) 
-# (так) Можливість додавати декілька каталогів для роботи із файлами 
-#зображень, 
-# (ні) можливість вказувати глибину для каталогів.
-# !!! При додаванні інформації з файлу, чий розмір менше 12 байт, 
-# !!! виникає помилка.
-
-#2) 
-# (так) Кількість кожного ключового слова (якщо є однакові) для кожного 
-#зображення (а не тільки загалом для всіх зображень у вказаних 
-#каталогах), 
-# (ні) можливість видаляти дублікати ключового слова для 
-#зображення. 
-
-#3) 
-# (ні) Складання складних запитів із ключових слів для пошуку зображень.
-
-#4) 
-# (ні) Можливість додавати нові ключові слова для знайдених зображень, 
-#заміняти або видаляти певні ключові слова.
-
-#5) 
-# (ні) Перегляд знайдених зображень, 
-# (ні) копіювання у нове місце, видалення 
-#зі старого місця. 
-
-###
 
 i_list = [0]
 
@@ -74,7 +41,6 @@ tab11_Graph = nx.Graph()
 
 tab11Btns = []
 
-# colors = ['160, 0, 0', '255, 0, 0', '255, 255, 0', '0, 210, 0', '0, 200, 255', '0, 0, 255', '190, 0, 190', '0, 230, 230', '255, 150, 0', '30, 210, 77', '158, 86, 245', '255, 255, 160']
 colors = ['160, 0, 0', '255, 0, 0', '255, 255, 0', '0, 230, 0', '0, 230, 230', '0, 0, 255', '190, 0, 190']
 colors_icons = ['ball_gradient--dark_red.png','ball_gradient--red.png','ball_gradient--yellow.png','ball_gradient--green.png','ball_gradient--sky_blue.png','ball_gradient--blue.png','ball_gradient--violet.png']
 colors_choosed_icons = ['ball_gradient--dark_red--choosed.png','ball_gradient--red--choosed.png','ball_gradient--yellow--choosed.png','ball_gradient--green--choosed.png','ball_gradient--sky_blue--choosed.png','ball_gradient--blue--choosed.png','ball_gradient--violet--choosed.png']
@@ -88,28 +54,6 @@ class Example(QWidget):
 		self.initGraph()
 
 	def initUI(self):
-		
-		#prevBtn = QPushButton('<-', self)
-		#nextBtn = QPushButton('->', self)
-		
-		#self.imgLbl = QLabel(self)
-		#pixmap = QPixmap(files_names[0])
-		#pixmap_new = pixmap.scaled(640, 480, Qt.KeepAspectRatio)
-		#self.imgLbl.setPixmap(pixmap_new)
-		
-		#self.qTable = QTableWidget(self)
-		#self.qTable.setRowCount(3)
-		#self.qTable.setColumnCount(3)
-		#for i in range(3):
-			#chkBoxItem = QTableWidgetItem()
-			#chkBoxItem.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
-			#chkBoxItem.setCheckState(Qt.Unchecked)
-			#self.qTable.setItem(i, 0, chkBoxItem)
-			#combo = QComboBox()
-			#combo.addItems(['1 position', '2 position', '3 position'])
-			#self.qTable.setCellWidget(i, 1, combo)
-			#tableLbl = QLabel('Table Label')
-			#self.qTable.setCellWidget(i, 2, tableLbl)
 		
 		self.tabs = QTabWidget()
 		self.tab1 = QWidget()
@@ -131,6 +75,8 @@ class Example(QWidget):
 		# Widgets to tab11
 		
 		# tab11Btns = []
+		
+		# Создать поле 9x9 из кнопок
 		
 		for i in range(9):
 			tab11BtnsList = []
@@ -217,9 +163,8 @@ class Example(QWidget):
 		
 		self.setLayout(grid)
 
-		self.tableCellLbl = QLabel("<b>Якийсь</b> текст")
-		self.tableCellLbl.setToolTip("<b>Якийсь</b> новий текст")
-		# self.tab2Table.setItem(1,1, QTableWidgetItem(tr("<b>Якийсь</b> текст")))
+		self.tableCellLbl = QLabel("<b>Some</b> text")
+		self.tableCellLbl.setToolTip("<b>Some</b> new text")
 		self.tab2Table.setCellWidget(1, 1, self.tableCellLbl)
 		self.tab2Table.insertRow(2)
 
@@ -318,34 +263,6 @@ class Example(QWidget):
 		
 		self.show()
 
-	
-	#new 09.07.2018
-	#def prevBtnClicked(self):
-		
-		#sender = self.sender()
-		
-		#if i_list[0] < len(files_names)-1:
-			#i_list[0] += 1
-		#else:
-			#i_list[0] = 0
-		##self.pixmap_new.load(files_names[i_list[0]])
-		##self.imgLbl.setPixmap(self.pixmap_new)
-		##pixmap = QPixmap(files_names[i_list[0]])
-		##pixmap_new = pixmap.scaled(640, 480, Qt.KeepAspectRatio)
-		##self.imgLbl.setPixmap(pixmap_new)
-		
-	#def nextBtnClicked(self):
-		
-		#sender = self.sender()
-
-		#if i_list[0] > 0:
-			#i_list[0] -= 1
-		#else:
-			#i_list[0] = len(files_names) - 1
-		##pixmap = QPixmap(files_names[i_list[0]])
-		##pixmap_new = pixmap.scaled(640, 480, Qt.KeepAspectRatio)
-		##self.imgLbl.setPixmap(pixmap_new)
-
 	def prevBtnClicked(self):
 		sender = self.sender()
 		self.lbl.setText('Previous Button was clicked')
@@ -354,14 +271,6 @@ class Example(QWidget):
 		sender = self.sender()
 		self.lbl.setText('Next Button was clicked')
 		#self.tab2Table.setItem(0,0, QTableWidgetItem("Some text"))
-
-	# def _on_radio_button_clicked(self, button):
-		# if button.property('btn_name') == 'and':
-			# # self.tab2Table.setItem(1,1, QTableWidgetItem('and pressed'))
-			# print('and pressed')
-		# elif button.property('btn_name') == 'or':
-			# # self.tab2Table.setItem(1,1, QTableWidgetItem('or pressed'))
-			# print('or pressed')
 
 	def radio_button_and_clicked(self):
 		sender = self.sender()
@@ -474,59 +383,6 @@ class Example(QWidget):
 				self.tab2TableItem.setForeground(QColor(0,0,230))
 			
 			self.tab2Table.setItem(i,0, self.tab2TableItem)
-			
-		
-		# 25.09.2018
-		
-		# f = 'IMG_9133.JPG'
-		# fd = open(f)
-		# d = fd.read()
-		# xmp_start = d.find('<x:xmpmeta')
-		# xmp_end = d.find('</x:xmpmeta')
-		# xmp_str = d[xmp_start:xmp_end+12]
-		# print(xmp_str)
-		
-		"""
-		with open('IMG_9133.JPG', "rb") as fin:
-			img = fin.read()
-		imgAsString = str(img)
-		xmp_start = imgAsString.find('<x:xmpmeta')
-		xmp_end = imgAsString.find('</x:xmpmeta')
-		if xmp_start != xmp_end:
-			xmpString = imgAsString[xmp_start:xmp_end + 12]
-		
-		print(type(imgAsString))
-		print(type(xmpString))
-		print(xmpString)
-		self.tab2Table.setItem(1,1, QTableWidgetItem(xmpString))
-		
-		b = xmpString.encode('utf-8')
-		print(b)
-		print(type(b))
-		
-		print(b.decode("utf-8"))
-		
-		splitted_xmp = re.split(b'</rdf:li> <rdf:li>', b)
-		
-		for i in range(len(splitted_xmp)):
-			new_str = splitted_xmp[i].decode()
-			new_converted_str = codecs.escape_decode(bytes(new_str, "utf-8"))[0].decode("utf-8")
-			print(new_converted_str)
-			print(type(splitted_xmp[i]))
-			self.tab2Table.setItem(i+5,1, QTableWidgetItem(new_converted_str))
-		"""
-		
-		# print(xmpString.encode('utf-8'))
-		# b = xmpString.encode()
-		# print(b)
-		# print(type(b))
-		
-		# print(b.decode())
-		# print(type(b.decode()))
-		
-		
-		
-		# /25.09.2018
 
 	def tab2TableItemSelChngd(self):
 		sender = self.sender()
@@ -546,122 +402,6 @@ class Example(QWidget):
 			self.tab2Table.setStyleSheet("QTableView {selection-background-color: rgb(135,212,243); selection-color:rgb(255,255,255);}")
 		
 		self.tab2Table.selectRow(i)
-		
-	"""
-	def tab2TableCellActivated(self, i, j):
-		sender = self.sender()
-		
-		print('table cell activated')
-		print('row num=' + str(i))
-		print('col num=' + str(j))
-	
-		self.cellLabel = self.tab2Table.cellWidget(i,j)
-		print(str(type(self.cellLabel)))
-		
-		if i % 2 == 0:
-			self.tab2Table.setStyleSheet("QTableView {selection-background-color: rgb(135,212,243); selection-color:rgb(255,255,0);}")
-		else:
-			self.tab2Table.setStyleSheet("QTableView {selection-background-color: rgb(135,212,243); selection-color:rgb(255,255,255);}")
-	"""
-		
-		# self.cellLabel.setStyleSheet('background-color: rgb(0,0,0); color: rgb(0,255,0)')
-	
-	# def add_dir_to_copy_btn_clicked(self):
-		# sender = self.sender()
-		
-		# # foldername = QFileDialog.getExistingDirectory(self, "Open Folder", dirName, QFileDialog.ShowDirsOnly)
-		# # foldername = QFileDialog.getOpenFileName(self, "Open Image File", dirName, '', 0)
-		# foldername = "f:\z_iso\win10_home_sl_ru_x64.iso"
-		
-		# if foldername:
-			# print('Foldername is ' + foldername)
-			# self.tab2Table.setItem(1, 0, QTableWidgetItem(foldername))
-			# self.src = foldername
-	
-	# def add_dir_to_receive_btn_clicked(self):
-		# sender = self.sender()
-		
-		# # foldername = QFileDialog.getExistingDirectory(self, "Open Folder", dirName, QFileDialog.ShowDirsOnly)
-		# # foldername = QFileDialog.getOpenFileName(self, "Open Image File", dirName)
-		# # foldername = "c:\Users\v-user\Desktop\copied_photos\new_file.iso"
-		# foldername = "f:\\new_file.iso"
-		
-		# if foldername:
-			# print('Foldername is ' + foldername)
-			# self.tab2Table.setItem(3, 0, QTableWidgetItem(foldername))
-			# self.dest = foldername
-	
-	# def copy_dir_btn_clicked(self):
-		# sender = self.sender()
-		
-		# self.auto_start_timer = QTimer()
-		# self.auto_start_timer.timeout.connect( lambda : self.copyfileobj( src=self.src, dst=self.dest, callback_progress=self.progress, callback_copydone=self.copydone )  )
-		# self.auto_start_timer.start(2000)
-	
-	
-	# def progress(self, fsrc, fdst, copied):
-		# size_src = os.stat( fsrc.name ).st_size
-		# size_dst = os.stat( fdst.name ).st_size
-
-		# float_src = float( size_src )
-		# float_dst = float( size_dst )
-
-		# percentage = int(float_dst/float_src*100)
-
-		# try:
-			# self.copy_progress.setValue( percentage )
-		# except:
-			# pass
-
-		# app.processEvents()
-	
-	
-	# def copydone(self, fsrc, fdst, copied):
-		# self.copy_progress.setValue( 100 )
-		# self.close()
-	
-	
-	# def copyfileobj(self, src, dst, callback_progress, callback_copydone, length=8*1024):
-
-		# # Prevent progress callback from being made each cycle
-		# c = 0
-		# c_max = 50
-
-		# try:
-			# self.auto_start_timer.stop()
-		# except:
-			# print('Error: could not stop QTimer')
-
-
-		# # with open(src, 'r') as fsrc:
-			# # with open(dst, 'w') as fdst:
-				# # copied = 0
-				# # while True:
-					# # buf = fsrc.read(length)
-					# # if not buf:
-						# # break
-					# # fdst.write(buf)
-					# # copied += len(buf)
-					# # c += 1
-					# # if c == c_max:
-						# # callback_progress(fsrc=fsrc, fdst=fdst, copied=copied)
-						# # c = 0
-				# # callback_copydone(fsrc=fsrc, fdst=fdst, copied=copied)
-	
-		# with open(src, 'r') as fsrc:
-			# with open(dst, 'w') as fdst:
-				# copied = 0
-				# while True:
-					# buf = fsrc.read(length)
-					# if not buf:
-						# break
-					# fdst.write(buf)
-					# copied += len(buf)
-					# c += 1
-					# if c == c_max:
-						# callback_progress(fsrc=fsrc, fdst=fdst, copied=copied)
-						# c = 0
-				# callback_copydone(fsrc=fsrc, fdst=fdst, copied=copied)
 	
 	def keyPressEvent(self, e):
 		print("event", e)
